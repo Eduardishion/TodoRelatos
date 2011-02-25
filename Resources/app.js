@@ -67,18 +67,32 @@ var categorias;
 
 showIndicator();
 
+Ti.API.info("antes de aquí llamo a online");
+
+Titanium.Network.createHTTPClient();
+
 if (Titanium.Network.online) {
+	Ti.API.info("intento llamar a YQL");
 	Titanium.Yahoo.yql('select * from html where url = "http://www.todorelatos.com/categorias/" and xpath="//*[@id=\'AutoNumber23\']/tr/td/table/tr/td/strong/a"', function(e){
-		hideIndicator();
+		Ti.API.info("estoy dentro de YQL");
 
 		try {
+			Ti.API.info("en el try cambio");
+
 			if (e.success) {
+				Ti.API.info("dentro de correcto");
+
 				var enlaces = e.data.a;
 
-				var tablacategorias = new Array();
+				var tablacategorias = [];
+				Ti.API.info("tengo datos");
 
 				for (var x in enlaces) {
+					Ti.API.info("pongo un enlace");
+
 					Ti.API.info(enlaces[x]["href"]);
+
+					/*
 					var row = Ti.UI.createTableViewRow({
 						height: 50
 					});
@@ -103,10 +117,22 @@ if (Titanium.Network.online) {
 					row.add(label);
 
 					tablecategorias.push(row);
+					*/
 				}
 
+				data[0] = Ti.UI.createTableViewRow({hasChild:true,title:'Header should be Foo',header:'Foo'});
+				data[1] = Ti.UI.createTableViewRow({hasDetail:true,title:'Row 2'});
+				data[2] = Ti.UI.createTableViewRow({hasCheck:true,title:'Header should be Bar',header:'Bar'});
+				data[3] = Ti.UI.createTableViewRow({title:'Footer should be Bye',footer:'Bye'});
+
+				// now do it with direct properties
+				var row = Ti.UI.createTableViewRow();
+				row.header = "Blah";
+				row.title = "Header should be Blah";
+				data[4] = row;
+
 				var tableview = Titanium.UI.createTableView({
-					data: tablacategorias
+					data: data
 				});
 
 				// create table view event listener
@@ -124,10 +150,16 @@ if (Titanium.Network.online) {
 
 				win1.add(tableview);
 
-				win1.open();
+				hideIndicator();
 
 			}
 			else {
+				Ti.API.info("estoy en el else");
+
+				hideIndicator();
+
+				Ti.API.info("despues del hide");
+
 				var dialog = Titanium.UI.createAlertDialog({
 					title: "No hay datos",
 					message: "No se han podido localizar los datos"
@@ -141,7 +173,9 @@ if (Titanium.Network.online) {
 				}
 			}
 		}
-		catch (E) {
+		catch (e) {
+			Ti.API.log("estoy en el catch");
+
 			var dialog3 = Titanium.UI.createAlertDialog({
 				title: "No hay conexión",
 				message: "Compruebe que está conectado a Internet por WIFI o 3G"
@@ -150,6 +184,8 @@ if (Titanium.Network.online) {
 	});
 }
 else {
+	Ti.API.log("no hay red");
+
 	var dialog = Titanium.UI.createAlertDialog({
 		title: "No hay conexión",
 		message: "Compruebe que está conectado a Internet por WIFI o 3G"
@@ -158,3 +194,6 @@ else {
 		Titanium.UI.currentWindow.close();
 	});
 }
+
+Ti.API.info("abre ventana");
+win1.open();
