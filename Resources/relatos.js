@@ -16,7 +16,7 @@ function loadRelatos(evento){
 	    backgroundColor:'#000'
 	});
 
-	showIndicator();
+	showIndicator('Buscando relatos...');
 	if (Titanium.Network.online) {
 		Titanium.Yahoo.yql('select * from html where url = "http://www.todorelatos.com'+row.enlace+'" and xpath="//*[@id=\'AutoNumber19\']/tbody/tr/td/table/tr/td/strong/a" and class="rlink" and charset="windows-1252"', function(e){
 			try{

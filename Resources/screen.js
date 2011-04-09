@@ -1,4 +1,4 @@
-function %(){
+function percent(){
       screenWidth = screen.availWidth;
       screenHeight = screen.availHeight;
 

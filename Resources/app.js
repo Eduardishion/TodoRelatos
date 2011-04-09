@@ -6,10 +6,12 @@ Ti.include('ti.helpers.js');
 Ti.include('indicator.js');
 Ti.include('charset.js');
 Ti.include('categorias.js');
+Ti.include('config_menu.js');
 
 //
 // create base UI tab and root window
 //
+
 var win1 = Titanium.UI.createWindow({
     title:'Categorias',
     backgroundColor:'#000'
@@ -17,7 +19,7 @@ var win1 = Titanium.UI.createWindow({
 
 var categorias;
 
-showIndicator();
+showIndicator('Leyendo categorías');
 
 win1.open();
 loadCategorias(win1);

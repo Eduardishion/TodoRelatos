@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
+    <deployment-targets>
+        <target device="iphone">false</target>
+        <target device="ipad">false</target>
+        <target device="android">true</target>
+    </deployment-targets>
 <id>com.sevir.todorelatos</id>
 <name>TodoRelatos</name>
-<version>2.0</version>
+<version>3.1</version>
 <publisher>sevir</publisher>
 <url>http://www.sevir.org</url>
 <description>Lector de relatos de todorelatos</description>
@@ -28,6 +33,8 @@
 		</orientations>
 	</iphone>
 	<android xmlns:android="http://schemas.android.com/apk/res/android">
+		<manifest android:versionCode="4" android:versionName="3.1">
+		</manifest>
 	</android>
 	<modules>
 	</modules>
